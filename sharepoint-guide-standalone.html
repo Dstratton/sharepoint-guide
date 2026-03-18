@@ -464,9 +464,9 @@
           <p class="step-desc">Click the group name to open it. Inside the group, <strong>tick the checkbox</strong> next to the user(s) you want to remove, then go to <strong>Actions → Remove Users from Group</strong>.</p>
           <div class="ui-mock">
             <div class="mock-bar"><span>👥 Site Members</span></div>
-            <div class="mock-row">☐ &nbsp;Alice Johnson — <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c9a8a5a0aaac89aaa6a4b9a8a7b0e7aaa6a4">[email&#160;protected]</a></div>
-            <div class="mock-row highlight">☑ &nbsp;Bob Wilson — <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="74161b1634171b1904151a0d5a171b19">[email&#160;protected]</a> &nbsp;← selected</div>
-            <div class="mock-row">☐ &nbsp;Carol Davis — <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d9bab8abb6b599bab6b4a9b8b7a0f7bab6b4">[email&#160;protected]</a></div>
+            <div class="mock-row">☐ &nbsp;Alice Johnson — alice@company.com</div>
+            <div class="mock-row highlight">☑ &nbsp;Bob Wilson — bob@company.com &nbsp;← selected</div>
+            <div class="mock-row">☐ &nbsp;Carol Davis — carol@company.com</div>
             <div style="height:8px"></div>
             <div class="mock-row highlight" style="justify-content:center;font-weight:600;"><div class="dot"></div>&nbsp;Actions → Remove Users from Group</div>
           </div>
@@ -488,7 +488,7 @@
 
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
   document.getElementById('footer-date').textContent = new Date().toLocaleDateString('en-GB', {year:'numeric',month:'long'});
 
   function switchTab(tab, btn) {
@@ -514,4 +514,15 @@
   }
 
   function updateProgress(stepsEl) {
-    const all = stepsEl.query
+    const all = stepsEl.querySelectorAll('.step').length;
+    const done = stepsEl.querySelectorAll('.step.done').length;
+    const pct = Math.round((done / all) * 100);
+    const isSite = stepsEl.id === 'steps-site';
+    const fillEl = document.getElementById(isSite ? 'prog-site' : 'prog-file');
+    const pctEl  = document.getElementById(isSite ? 'prog-site-pct' : 'prog-file-pct');
+    fillEl.style.width = pct + '%';
+    pctEl.textContent = done + ' / ' + all;
+  }
+</script>
+</body>
+</html>
